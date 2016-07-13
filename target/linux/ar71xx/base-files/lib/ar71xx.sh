@@ -1045,6 +1045,9 @@ ar71xx_board_detect() {
 	*"TL-MR13U v1")
 		name="tl-mr13u"
 		;;
+	*"TOUCHSTAR VH401")
+		name="ts-vh401"
+		;;
 	*"Tube2H")
 		name="tube2h"
 		;;
