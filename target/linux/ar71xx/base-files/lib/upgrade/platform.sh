@@ -272,6 +272,7 @@ platform_check_image() {
 	unifiac-pro | \
 	unifi-outdoor | \
 	carambola2 | \
+	ts-vh401 | \
 	weio | \
 	wrtnode2q)
 		[ "$magic" != "2705" ] && {
@@ -438,7 +439,6 @@ platform_check_image() {
 
 		return 0
 		;;
-
 	tube2h)
 		alfa_check_image "$1" && return 0
 		return 1
