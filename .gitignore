@@ -27,4 +27,6 @@ git-src
 /files/root
 /files/etc/dropbear/id_rsa
 /*.tar.gz
-/*.sh
+/create-*.sh
+/archive-*.sh
+/deploy-*.sh
