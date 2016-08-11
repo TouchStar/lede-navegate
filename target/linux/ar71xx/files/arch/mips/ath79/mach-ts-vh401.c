@@ -22,7 +22,7 @@
 
 #include <linux/gpio.h>
 
-#define FAKE_TPLINK
+//#define FAKE_TPLINK
 
 #define TS_VH401_GPIO_LED_SYSTEM		   	1
 
@@ -45,7 +45,7 @@ static struct gpio_led ts_VH401_leds_gpio[] __initdata = {
 	{
 		.name = "ts-vh401:system",
 		.gpio = TS_VH401_GPIO_LED_SYSTEM,
-		.active_low = 0,
+		.active_low = 1,
 	}
 };
 
@@ -56,7 +56,7 @@ static struct gpio_keys_button ts_VH401_gpio_keys[] __initdata = {
 		.code = KEY_RESTART,
 		.debounce_interval = TS_VH401_KEYS_DEBOUNCE_INTERVAL,
 		.gpio = TS_VH401_GPIO_BTN_RESET,
-		.active_low = 0,
+		.active_low = 1,
 	},
 };
 

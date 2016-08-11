@@ -450,7 +450,7 @@ define Device/ts-vh401
   BOARDNAME = TS-VH401
   IMAGE_SIZE = 16000k
   CONSOLE = ttyATH0,115200
-  MTDPARTS = spi0.0:256k(u-boot)ro,64k(u-boot-env)ro,16000k(firmware),64k(art)ro
+  MTDPARTS = spi0.0:256k(u-boot)ro,64k(u-boot-env),16000k(firmware),64k(art)
 endef
 
 TARGET_DEVICES += ts-vh401
