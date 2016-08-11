@@ -35,7 +35,6 @@ om5p-an | \
 om5p-ac | \
 om5p-acv2 | \
 om5p | \
-ts-vh401 | \
 tube2h | \
 wndr3700)
 	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0x10000" "0x10000"
@@ -55,6 +54,9 @@ wzr-hp-ag300h)
 	;;
 qihoo-c301)
 	ubootenv_add_uci_config "/dev/mtd9" "0x0" "0x10000" "0x10000"
+	;;
+ts-vh401)
+	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0x8000" "0x10000"
 	;;
 esac
 
