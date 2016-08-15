@@ -11,13 +11,11 @@ ts-vh401)
 	apn="telstra.internet"
 
 		# Grab configuration from uboot
-	nic=$(wlanmac_nic_get)
-	serial=$(serial_get)	
-	deviceid=$(deviceid_get)
+	populate_ubootvars
 
 		# Determine apn/ssid/host
-    ssid=$(format_get ts_ssid "IntelLINK{-nic}")
-    host=$(format_get ts_host "il{-serial}")
+    ssid=$(format_get ts_ssid "IntelLINK{-auto}")
+    host=$(format_get ts_host "il{-auto}")
 	tmp_apn=$(apn_get)
 	if [ $? == 0 ]; then
         apn=$tmp_apn
