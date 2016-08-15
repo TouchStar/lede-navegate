@@ -88,6 +88,13 @@ str_indexof() {
      echo $tmp
 }
 
+# Populate default ubootvars (from uboot environment) used for format_get() below
+populate_ubootvars() {
+    nic=$(wlanmac_nic_get)
+    serial=$(ubootenv_get ts_serial)
+    deviceid=$(ubootenv_get ts_deviceid)
+}
+
 # Helper for substitution below
 # $1 = formatted value, $2 = variable name to substitute with
 # returns 1 if substitution occurred (with an actual value)
@@ -129,9 +136,17 @@ format_get() {
       # detect location of innerhyphen "{-", then scrub it.
     innerhyphen=$(str_indexof $formatted "{-")
     formatted=$(echo $formatted | sed -e "s/{-/{/g")
-    
+
+      # determine auto from an in order (deviceid, serial, nic)
+    if   [ -n "$deviceid" ]; then auto=$deviceid
+    elif [ -n "$serial" ];   then auto=$serial
+    else                          auto=$nic
+    fi
+
       # format substitutions
     sub_count=0
+    formatted=$(format_sub $formatted auto)
+    sub_count=$(($sub_count+$?))
     formatted=$(format_sub $formatted nic)
     sub_count=$(($sub_count+$?))
     formatted=$(format_sub $formatted serial)
@@ -139,7 +154,7 @@ format_get() {
     formatted=$(format_sub $formatted deviceid)
     sub_count=$(($sub_count+$?))
 
-      # handle innerhyphen, by adding it back to the formatted string.
+      # handle innerhyphen, by adding it back to the formatted string (only if we subsituted).
     if [ $innerhyphen != 0 ] && [ "$sub_count" -gt 0 ]; then
  	start=`expr substr $formatted 1 $innerhyphen`
     	end=`expr substr $formatted $(($innerhyphen+1)) 100`
