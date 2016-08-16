@@ -56,6 +56,9 @@ ts-vh401)
   	uci set autossh.@autossh[0].poll='300'
 	uci commit autossh 	
 
+		# Initialised disabled.
+	/etc/init.d/autossh disable 
+
 		# disable ipv6 for test network given issues on TS network with device becoming primary dns resolved for link-local.
   	uci delete network.ts6
   	uci commit network 	
