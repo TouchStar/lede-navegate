@@ -77,8 +77,8 @@ apn_get() {
 
 # Index of $2 in $1, 0 if not found, otherwise non-zero offset.
 str_indexof() {
-     v1=$1
-     v2=$2
+     local v1=$1
+     local v2=$2
      tmp="${v1%%$v2*}"
      if [ "$tmp" != "$formatted" ]; then
         tmp=${#tmp}
