@@ -25,7 +25,9 @@ key-build*
 .emacs.desktop*
 TAGS*~
 git-src
-/files/root
+/files/root/.ssh
+/files/root/wip
+/files/root/tests
 /files/etc/dropbear/id_rsa
 /*.tar.gz
 /create-*.sh
