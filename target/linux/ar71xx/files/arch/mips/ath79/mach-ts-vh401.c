@@ -29,11 +29,11 @@
 #ifdef FAKE_TPLINK
 #define TS_VH401_GPIO_PIN_USBPOWER      	8		// Just to get working on TPLink.
 #endif
-#define TS_VH401_GPIO_BTN_RESET	   	   		12
+#define TS_VH401_GPIO_BTN_RESET	   	   		11
 
 #define TS_VH401_ART_DATA_ADDR				0x1fff0000
 
-#define TS_VH401_KEYS_POLL_INTERVAL   		0	/* msecs */
+#define TS_VH401_KEYS_POLL_INTERVAL   		20	/* msecs */
 #define TS_VH401_KEYS_DEBOUNCE_INTERVAL		(3 * TS_VH401_KEYS_POLL_INTERVAL)
 
 #define TS_VH401_MAC0_OFFSET				0x0000
