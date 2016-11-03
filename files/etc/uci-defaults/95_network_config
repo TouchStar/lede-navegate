@@ -14,11 +14,11 @@ ts-vh401)
 	populate_ubootvars
 
 		# Determine apn/ssid/host
-    ssid=$(format_get ts_ssid "IntelLINK{-auto}")
-    host=$(format_get ts_host "il{-auto}")
+	ssid=$(format_get ts_ssid "IntelLINK{-auto}")
+	host=$(format_get ts_host "il{-auto}")
 	tmp_apn=$(apn_get)
 	if [ $? == 0 ]; then
-        apn=$tmp_apn
+		apn=$tmp_apn
 	fi	
 
 	logger -t network-config "Determined SSID=[$ssid] Hostname[$host] APN[$apn]"
@@ -33,13 +33,18 @@ ts-vh401)
 		# Rather than disabling rebind protection, let's just allow it for "our" domains.
 	uci add_list dhcp.@dnsmasq[0].rebind_domain='touchstar.com.au'
 	uci add_list dhcp.@dnsmasq[0].rebind_domain='touchstar.biz'
+
+		# Disable DHCP requests on 'ts' interface
+	uci set dhcp.ts=dhcp
+	uci set dhcp.ts.interface=ts
+	uci set dhcp.ts.ignore=1
  	uci commit dhcp
 	
 		# Enabled wifi and set default SSID (restart once uci is set)
 	uci set wireless.@wifi-iface[0].ssid="$ssid"
-  	uci set wireless.@wifi-device[0].disabled=0
-  	uci commit wireless
-  	wifi
+	uci set wireless.@wifi-device[0].disabled=0
+	uci commit wireless
+	wifi
 
 		# Setup 3g cellular and set APN.
   	uci set network.wan=interface
@@ -51,17 +56,17 @@ ts-vh401)
  		# Setup AutoSSH
  	autossh_port=$(($serial + 10000))
 
-	uci set autossh.@autossh[0].ssh="-i /etc/dropbear/id_rsa -N -T -R *:$autossh_port:localhost:22 device@machine20.touchstar.com.au"
+	uci set autossh.@autossh[0].ssh="-i /etc/dropbear/id_rsa -N -T -R *:$autossh_port:localhost:22 device@helios.touchstar.biz"
 	uci set autossh.@autossh[0].monitorport='0'
-  	uci set autossh.@autossh[0].poll='300'
-	uci commit autossh 	
+	uci set autossh.@autossh[0].poll='300'
+	uci commit autossh
 
 		# Initialised disabled.
 	/etc/init.d/autossh disable 
 
 		# disable ipv6 for test network given issues on TS network with device becoming primary dns resolved for link-local.
-  	uci delete network.ts6
-  	uci commit network 	
+	uci delete network.ts6
+	uci commit network 	
 	;;
 esac
 
