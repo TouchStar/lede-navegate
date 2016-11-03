@@ -1,5 +1,5 @@
 #!/bin/sh
-scp -i ~/.ssh/id_rsa device@machine20.touchstar.com.au:/tftpboot/firmware$1.bin /tmp/firmware.bin
+scp -i ~/.ssh/id_rsa device@helios.touchstar.biz:/tftpboot/firmware$1.bin /tmp/firmware.bin
 if [ $? -ne 0 ]; then
     echo "Unable to download firmware$1.bin from helios"
     exit 1
