@@ -53,6 +53,10 @@ ts-vh401)
   	uci set network.wan.service='umts'
  	uci set network.wan.apn="$apn"
 
+		# Uncomment for QMI Cellular
+#	uci set network.wan.proto='qmi'
+#	uci set network.wan.device='/dev/cdc-wdm0'
+
  		# Setup AutoSSH
  	autossh_port=$(($serial + 10000))
 
