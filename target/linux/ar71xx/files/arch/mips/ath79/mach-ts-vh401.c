@@ -30,6 +30,7 @@
 #define TS_VH401_GPIO_PIN_USBPOWER      	8		// Just to get working on TPLink.
 #endif
 #define TS_VH401_GPIO_BTN_RESET	   	   		11
+#define TS_VH401_GPIO_CELLULAR_RESET   		14
 
 #define TS_VH401_ART_DATA_ADDR				0x1fff0000
 
@@ -92,6 +93,9 @@ static void __init ts_vh401_setup(void)
 								ARRAY_SIZE(ts_VH401_gpio_keys),
 								ts_VH401_gpio_keys);
 
+	gpio_request_one(TS_VH401_GPIO_CELLULAR_RESET,
+			 GPIOF_OUT_INIT_HIGH | GPIOF_EXPORT_DIR_FIXED,
+			 "Cellular Reset");
 
 #ifdef FAKE_TPLINK	
 	/* enable usb for TPLink boards*/
