@@ -21,6 +21,7 @@
 #include "machtypes.h"
 
 #include <linux/gpio.h>
+#include <linux/delay.h>
 
 //#define FAKE_TPLINK
 
@@ -31,6 +32,8 @@
 #endif
 #define TS_VH401_GPIO_BTN_RESET	   	   		11
 #define TS_VH401_GPIO_CELLULAR_RESET   		14
+
+#define TS_VH401_GPIO_CELLULAR_CINTERION_PH8_POWERON_DELAY	150		// Per specification (>3.001 firmware) must be >100ms
 
 #define TS_VH401_ART_DATA_ADDR				0x1fff0000
 
@@ -96,6 +99,11 @@ static void __init ts_vh401_setup(void)
 	gpio_request_one(TS_VH401_GPIO_CELLULAR_RESET,
 			 GPIOF_OUT_INIT_HIGH | GPIOF_EXPORT_DIR_FIXED,
 			 "Cellular Reset");
+
+		// Pulse the modem for initial power-on.
+	gpio_set_value(TS_VH401_GPIO_CELLULAR_RESET, 0);
+	mdelay(TS_VH401_GPIO_CELLULAR_CINTERION_PH8_POWERON_DELAY);
+	gpio_set_value(TS_VH401_GPIO_CELLULAR_RESET, 1);
 
 #ifdef FAKE_TPLINK	
 	/* enable usb for TPLink boards*/
