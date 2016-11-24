@@ -5,5 +5,5 @@ BASEDIR=$(dirname "$0")
 # Here we assume the modem was powered for at least 5s.
 
 $BASEDIR/cellular_poweroff.sh
-sleep 1.5
+sleep 3.5
 $BASEDIR/cellular_poweron.sh
