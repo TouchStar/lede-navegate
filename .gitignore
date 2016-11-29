@@ -25,6 +25,7 @@ key-build*
 .emacs.desktop*
 TAGS*~
 git-src
+###############################
 /files/root/.ssh
 /files/root/wip
 /files/root/tests
@@ -33,3 +34,6 @@ git-src
 /create-*.sh
 /archive-*.sh
 /deploy-*.sh
+/build-*.sh
+/touchstar/config*
+/config_*
