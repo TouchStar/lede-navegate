@@ -10,7 +10,7 @@
 # REVISION:=x
 # SOURCE_DATE_EPOCH:=x
 
-RELEASE:=Reboot
+RELEASE:=Release Testing
 
 PKG_CONFIG_DEPENDS += \
 	CONFIG_VERSION_BUG_URL \
@@ -31,7 +31,7 @@ qstrip_escape=$(subst ','\'',$(call qstrip,$(1)))
 sanitize = $(call tolower,$(subst _,-,$(subst $(space),-,$(1))))
 
 VERSION_NUMBER:=$(call qstrip_escape,$(CONFIG_VERSION_NUMBER))
-VERSION_NUMBER:=$(if $(VERSION_NUMBER),$(VERSION_NUMBER),SNAPSHOT)
+VERSION_NUMBER:=$(if $(VERSION_NUMBER),$(VERSION_NUMBER),16.12-SNAPSHOT)
 
 VERSION_CODE:=$(call qstrip_escape,$(CONFIG_VERSION_CODE))
 VERSION_CODE:=$(if $(VERSION_CODE),$(VERSION_CODE),$(REVISION))
@@ -40,7 +40,7 @@ VERSION_NICK:=$(call qstrip_escape,$(CONFIG_VERSION_NICK))
 VERSION_NICK:=$(if $(VERSION_NICK),$(VERSION_NICK),$(RELEASE))
 
 VERSION_REPO:=$(call qstrip_escape,$(CONFIG_VERSION_REPO))
-VERSION_REPO:=$(if $(VERSION_REPO),$(VERSION_REPO),http://downloads.lede-project.org/snapshots)
+VERSION_REPO:=$(if $(VERSION_REPO),$(VERSION_REPO),http://downloads.lede-project.org/releases/16.12-SNAPSHOT)
 
 VERSION_DIST:=$(call qstrip_escape,$(CONFIG_VERSION_DIST))
 VERSION_DIST:=$(if $(VERSION_DIST),$(VERSION_DIST),LEDE)
