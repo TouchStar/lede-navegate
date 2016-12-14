@@ -33,7 +33,7 @@
 #define TS_VH401_GPIO_BTN_RESET	   	   		11
 #define TS_VH401_GPIO_CELLULAR_RESET   		14
 
-#define TS_VH401_GPIO_CELLULAR_CINTERION_PH8_POWERON_DELAY	150		// Per specification (>3.001 firmware) must be >100ms
+#define TS_VH401_GPIO_CELLULAR_CINTERION_PH8_POWERON_PERIOD		150		// Per specification (>3.001 firmware) must be >100ms
 
 #define TS_VH401_ART_DATA_ADDR				0x1fff0000
 
@@ -102,7 +102,7 @@ static void __init ts_vh401_setup(void)
 
 		// Pulse the modem for initial power-on.
 	gpio_set_value(TS_VH401_GPIO_CELLULAR_RESET, 0);
-	mdelay(TS_VH401_GPIO_CELLULAR_CINTERION_PH8_POWERON_DELAY);
+	mdelay(TS_VH401_GPIO_CELLULAR_CINTERION_PH8_POWERON_PERIOD);
 	gpio_set_value(TS_VH401_GPIO_CELLULAR_RESET, 1);
 
 #ifdef FAKE_TPLINK	
