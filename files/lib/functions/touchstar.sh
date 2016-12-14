@@ -26,26 +26,36 @@ ubootenv_set() {
 	fi	
 }
 
+# Get adapter $1's MACAddress in uppercase stripped for colons
+mac_get() {
+  mac=$(cat /sys/class/net/$1/address)
+  if [ -z "$mac" ]; then
+    return 1
+  else
+    # Strip colon, upper case then extract nic portion.
+    mac=$(echo $mac | tr -d : | tr [a-z] [A-Z])
+  fi
+  echo $mac
+}
+
+# Get adapter $1's MACAddress nic component (last 6 hex digits)
+mac_nic_get() {
+  wlanmac=$(mac_get $1)  
+  if [ $? == 0 ]; then
+      echo ${wlanmac:6}
+    else
+      return 1
+    fi
+}
+
 # Get WLAN MACAddress in uppercase stripped for colons
 wlanmac_get() {
-	wlanmac=$(cat /sys/class/net/wlan0/address)
-	if [ -z "$wlanmac" ]; then
-		return 1
-	else
-        	# Strip colon, upper case then extract nic portion.
-	        wlanmac=$(echo $wlanmac | tr -d : | tr [a-z] [A-Z])
-	fi
-	echo $wlanmac
+	echo $(mac_get wlan0)
 }
 
 # Get WLAN MACAddress nic component (last 6 hex digits)
 wlanmac_nic_get() {
-	wlanmac=$(wlanmac_get)	
-	if [ $? == 0 ]; then
-  		echo ${wlanmac:6}
-  	else
-  		return 1
-  	fi
+  echo $(mac_nic_get wlan0)  
 }
 
 # Get Serial Number
@@ -88,9 +98,12 @@ str_indexof() {
      echo $tmp
 }
 
-# Populate default ubootvars (from uboot environment) used for format_get() below
-populate_ubootvars() {
+# Populate default environment (ubootvars - from uboot environment) used for format_get() below
+populate_environment() {
     nic=$(wlanmac_nic_get)
+    if [ -z $nic ]; then
+      nic=$(mac_nic_get eth0)
+    fi
     serial=$(ubootenv_get ts_serial)
     deviceid=$(ubootenv_get ts_deviceid)
 }
@@ -162,4 +175,13 @@ format_get() {
     fi
     
     echo $formatted
+}
+
+boardname_get() {
+  local result="emu"
+  if [ -e /lib/ar71xx.sh ]; then
+        . /lib/ar71xx.sh
+        result=$(ar71xx_board_name)
+  fi
+  echo $result
 }

@@ -27,7 +27,7 @@ TAGS*~
 git-src
 ###############################
 /files/root/.ssh
-/files/root/wip
+/files/root/dev
 /files/root/tests
 /files/etc/dropbear/id_rsa
 /*.tar.gz
@@ -35,6 +35,11 @@ git-src
 /archive-*.sh
 /deploy-*.sh
 /build-*.sh
-/touchstar/config*
+/touchstar/
+/private/
+/vbox-*.sh
+/emu
+/edit
+/edit-*
 /config_*
 !/config_version
