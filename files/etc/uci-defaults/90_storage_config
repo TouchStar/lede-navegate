@@ -1,7 +1,6 @@
-. /lib/ar71xx.sh
 . /lib/functions/touchstar.sh
 
-board=$(ar71xx_board_name)
+board=$(boardname_get)
 
 logger -t storage-config "Applying storage configuration [start]"
 
