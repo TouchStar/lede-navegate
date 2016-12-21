@@ -41,5 +41,6 @@ git-src
 /emu
 /edit
 /edit-*
+/work-*
 /config_*
 !/config_version
