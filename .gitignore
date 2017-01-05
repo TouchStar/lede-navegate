@@ -13,7 +13,7 @@
 /feeds
 /feeds.conf
 /overlay
-#/files
+/files
 /package/feeds
 /package/openwrt-packages
 key-build*
@@ -26,10 +26,6 @@ key-build*
 TAGS*~
 git-src
 ###############################
-/files/root/.ssh
-/files/root/dev
-/files/root/tests
-/files/etc/dropbear/id_rsa
 /*.tar.gz
 /create-*.sh
 /archive-*.sh
