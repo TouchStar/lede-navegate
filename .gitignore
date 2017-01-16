@@ -33,6 +33,7 @@ git-src
 /build-*.sh
 /touchstar/
 /private/
+/custom/
 /vbox-*.sh
 /emu
 /edit
